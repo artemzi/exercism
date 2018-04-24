@@ -29,10 +29,7 @@ class Bob
 
     public function isShouting($m) {
         for ($i=0; $i < strlen($m); $i++) {
-            if ($m[$i] == ',' || $m[$i] == ' ' || $m[$i] == '?' || $m[$i] == '!' || $m[$i] == '\t') {
-                continue;
-            }
-            if (ctype_lower($m[$i])) {
+            if ($this->isLegal($m[$i]) && ctype_lower($m[$i])) {
                 return FALSE;
             }
         }
@@ -42,10 +39,7 @@ class Bob
 
     public function isNubmers($m) {
         for ($i=0; $i < strlen($m); $i++) {
-            if ($m[$i] == ',' || $m[$i] == ' ' || $m[$i] == '?' || $m[$i] == '!' || $m[$i] == '\t') {
-                continue;
-            }
-            if (!is_numeric($m[$i])) {
+            if ($this->isLegal($m[$i]) && !is_numeric($m[$i])) {
                 return FALSE;
             }
         }
@@ -55,14 +49,20 @@ class Bob
 
     public function isLetter($m) {
         for ($i=0; $i < strlen($m); $i++) {
-            if ($m[$i] == ',' || $m[$i] == ' ' || $m[$i] == '?' || $m[$i] == '!' || $m[$i] == '\t') {
-                continue;
-            }
-            if (!ctype_alpha($m[$i])) {
+            if ($this->isLegal($m[$i]) && !ctype_alpha($m[$i])) {
                 return FALSE;
             }
         }
 
         return TRUE;
+    }
+
+    private function isLegal(string $m): bool
+    {
+        if (in_array($m, [',', ' ', '?', '!', '\t'])) {
+            return false;
+        }
+
+        return true;
     }
 }

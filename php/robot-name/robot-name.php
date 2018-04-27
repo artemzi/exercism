@@ -26,10 +26,11 @@ class Registry
 
     public static function magic()
     {
-        do {
-            $l = range('A', 'Z');
-            shuffle($l);
 
+        $l = range('A', 'Z');
+        shuffle($l);
+        
+        do {
             $name = $l[rand(0, 25)] . $l[rand(0, 25)] . sprintf('%03d', mt_rand(0, 999));
         } while (in_array($name, self::$_registry));
 

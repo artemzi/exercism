@@ -1,6 +1,8 @@
 <?php
 
-
+// not interested in problem research
+// problem description is too long, I don't want to spend time on understanding.
+// found this solution as interesting
 class Game
 {
     private $frames = [];
